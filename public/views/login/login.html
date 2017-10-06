@@ -1,0 +1,20 @@
+
+<div class="col-md-4 col-sm-8 col-xs-12 col-md-offset-4 col-sm-offset-2 padding-20" style="border:2px solid #e2e2e2; border-radius:4px;">
+    <div class="m-t-20 m-b-20">
+        <img src="../../img/logo_nextoner-04.svg" width="200">
+    </div>
+    <div class="m-b-10">
+         <span>Please login below to continue using nexToner.</span>
+        <small class="text-danger">Not supported in Internet Explorer</small>
+    </div>
+    <div class="form-group form-group-default" ng-init="">
+        <label>username</label>
+        <input type="email" class="form-control" ng-model="user.username">
+    </div>
+    <div class="form-group form-group-default">
+        <label>password</label>
+        <input type="password" class="form-control" ng-model="user.password" ng-enter="login(user)">
+    </div>
+    <button class="btn btn-lg btn-info btn-block" ng-click="login(user)" >Login</button>
+<!--    <img src="../../img/tube.jpg" width="500">-->
+</div>

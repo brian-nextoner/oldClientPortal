@@ -1,0 +1,168 @@
+<!-- START PAGE CONTENT -->
+<div class="">
+    <!-- START JUMBOTRON -->
+    <div class="jumbotron" data-pages="parallax" ng-hide="currentUser == null">
+        <div class="container-fluid sm-p-l-20 sm-p-r-20">
+            <div class="inner">
+                <!-- START BREADCRUMB -->
+                
+                <!-- END BREADCRUMB -->
+            </div>
+        </div>
+    </div>
+    <!-- END JUMBOTRON -->
+    <!-- START CONTAINER FLUID -->
+    <div admin-rep class="container-fluid">
+       <div class="col-md-12">
+           <div class="panel panel-transparent">
+               <div class="panel-body">
+                   <div class="row">
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">My Profile</div>
+                                    <div class="panel-body">
+                                        
+                                        
+                                        <form autocomplete="off" id="form-personal" name="form-personal" novalidate="novalidate" role="form">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group form-group-default required">
+                                                        <label>Company Name</label> <input ng-model="coName" aria-required="true" aria-invalid="true" class="form-control" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Username/Email</label> <input ng-model="username" aria-required="true" class="form-control" name="email" required="" type="email">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Password</label> <input aria-required="true" ng-model="pwd" class="form-control" name="password" placeholder="Minimum of 8 characters." required="" type="password">
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                            
+                                            <div class="row h3 light">Client Information</div>
+                                            
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div aria-required="true" class="form-group form-group-default required">
+                                                        <label>First name</label> <input ng-model="fname" aria-invalid="true" aria-required="true" class="form-control error" name="firstName" required="" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Last name</label> <input ng-model="lname" aria-invalid="true" aria-required="true" class="form-control" name="lastName" required="" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Position/Title</label> <input ng-model="position" aria-required="true" class="form-control" name="email" required="" type="email">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Mobile #</label> <input ng-model="mobile" aria-required="true" class="form-control" name="mobileNum" required="" type="tel">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
+                                                <div class="col-sm-8">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Office #</label> <input ng-model="office" aria-required="true" class="form-control" name="officeNum" required="" type="email">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Extension</label> <input ng-model="ext" aria-required="true" class="form-control" name="ext" required="" type="email">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row h3 light">Shipping Address</div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Address 1</label> <input ng-model="addr1" aria-required="true" class="form-control" name="addr1" required="" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Address 2</label> <input ng-model="addr2" aria-required="true" class="form-control" name="addr2" required="" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group form-group-default">
+                                                        <label>City</label> <input ng-model="city" aria-required="true" class="form-control" name="city" required="" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" >
+                                                <div class="col-sm-12">
+                                                    <div class="form-group form-group-default form-group-default-select2">
+                                                        <label>State: {{state}}</label> 
+                                                        <select class="typeahead full-width select2-hidden-accessible" ng-model="state" name="state" ng-options="obj.abbreviation as obj.name for obj in states">
+
+                                                        </select>                                                      
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Zip</label> <input aria-required="true" class="form-control" ng-model="zip" name="zip" required="" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="clearfix"></div>
+                                            
+                                            <button ng-click="postTest()" class="btn btn-lg btn-info"><i class="fa fa-save m-r-5"></i> Save</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

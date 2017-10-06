@@ -1,0 +1,766 @@
+<!-- START PAGE CONTENT -->
+<div class="">
+    <!-- START JUMBOTRON -->
+    <div class="jumbotron" data-pages="parallax" ng-hide="currentUser == null">
+        <div class="container-fluid sm-p-l-20 sm-p-r-20">
+            <div class="inner">
+                <!-- START BREADCRUMB -->
+                
+                <!-- END BREADCRUMB -->
+            </div>
+        </div>
+    </div>
+    <!-- END JUMBOTRON -->
+    <!-- START CONTAINER FLUID -->
+    <div admin-rep ng-controller="homeOrdersCtrl" class="container-fluid" ng-show="currentUser.userType >= '20'">
+       <div class="col-md-12">
+           <div class="panel panel-transparent">
+               <div class="panel-body">
+                   <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">Recent Statistics</div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-6 bg-info p-b-15 p-l-30" style="color:#ffffff; border-radius:10px 0px 0px 10px">
+                                                <h1 style="color:#ffffff;" class="m-b-0">$156.88</h1>
+                                                <small>Total Sales</small>
+                                            </div>
+                                            <div class="col-md-6 bg-success p-b-15 p-l-30" style="color:#ffffff; border-radius:0px 10px 10px 0px">
+                                                <h1 style="color:#ffffff;" class="m-b-0">$24.88</h1>
+                                                <small>Commissions</small>
+                                            </div>
+                                        </div>
+                                        <div class="row m-t-20" ng-init="date = {'moNum': 2,'yrNum':2017}">
+                                            <div class="btn-group">
+                                                <button ng-click="update(date)" class="btn btn-sm btn-default m-t-0">Update</button>
+                                                <select ng-model="date.moNum" class="btn cs-select cs-skin-slide input-sm p-t-5" data-init-plugin="cs-select">
+                                                    <option value="1">January</option>
+                                                    <option value="2">February</option>
+                                                    <option value="3">March</option>
+                                                    <option value="4">April</option>
+                                                    <option value="5">May</option>
+                                                    <option value="6">June</option>
+                                                    <option value="7">July</option>
+                                                    <option value="8">August</option>
+                                                    <option value="9">September</option>
+                                                    <option value="10">October</option>
+                                                    <option value="11">November</option>
+                                                    <option value="12">December</option>
+                                                </select>
+                                                <select ng-model="date.yrNum" class="btn cs-select cs-skin-slide input-sm p-t-5" data-init-plugin="cs-select">
+                                                    <option value="2016">2016</option>
+                                                    <option value="2017">2017</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <table class="table table-hover table-condensed dataTable no-footer" >
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width:100px;">SO#</th>
+                                                            <th>Recent Sales</th>
+                                                            <th>Sale</th>
+                                                            <th>Commission</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="order in orders">
+                                                            <td>{{order.checkoutHdrKey}}</td>
+                                                            <td>{{order.Name}}</td>
+                                                            <td class="text-success">{{order.total | currency}}</td>
+                                                            <td>{{order.commission | currency}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" ng-hide="{{intro}}">
+                           <div class="panel panel-default">
+                               <div class="panel-body">
+                                   <h3>Hello, {{fname}}</h3>
+                                   <div>
+                                       <span>Welcome to your dashboard! This is nexToner 2.0, a full house software suit to help you sell toner contracts as effectively as possible.</span>
+                                   </div>
+                                   <button class="btn btn-info m-t-20">Let's Begin</button>
+                                   <button class="btn btn-danger m-t-20" ng-click="closeIntro(intro)">Close</button>
+                               </div>
+                           </div>
+                        </div>
+                   </div>
+               </div>
+           </div>
+
+       </div>
+
+    </div>
+    <div user ng-controller="userHomeCtrl" class="container-fluid" ng-show="currentUser.userType == '10'">
+        <div class="col-md-12">
+           <div class="panel panel-transparent">
+               <div class="panel-body">
+                   <div class="row">
+                        <div class="col-md-12 col-sm-12 col-lg-9 sm-p-l-0 sm-p-t-0 sm-p-r-0 sm-p-b-0">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">My Company</div>
+                                   
+                                    
+                                </div>
+                                <div class="panel-body">
+                                        
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h2 >{{company.name}}</h2>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div><strong>{{company.fname + ' ' + lname}}</strong></div>
+                                                <div>{{company.username}}</div>
+                                                <div>{{company.mobile}}</div>
+                                                <br>
+                                                <div>{{company.addr1}}</div>
+                                                <div>{{company.city + ' ' + company.state + ' ' + company.zip}}</div>
+                                            </div>
+                                            <div class="col-md-6 hidden-xs" style="text-align:right;">
+                                                <div><strong>{{company.rFname + ' ' + company.rLname}}</strong></div>
+                                                <div>nexToner Sales Rep</div>
+                                                <div>{{company.rUsername}}</div>
+                                                <div>{{company.rMobile}}</div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                        
+                                            <div class="panel m-t-40" style="border:2px solid #eeeeee; border-radius:3px;" >
+                                                <div class="nav-tabs-header nav-tabs-linetriangle">
+                                                    <ul class="nav nav-tabs nav-tabs-simple" role="tab" data-init-reponsive-tabs="dropdownfx" >
+                                                        <li class="" ng-click="printer(coKey)">
+                                                            <a data-toggle="tab" href="#t1"><i class="fa fa-adjust m-r-5"></i>Order Toner</a>
+                                                        </li>
+                                                        <li ng-click="cart(coKey)" class="">
+                                                            <a data-toggle="tab" href="#t2"><i class="fa fa-shopping-cart m-r-5"></i>Cart</a>
+                                                        </li>
+                                                        <li ng-click="orderHistory(10)">
+                                                            <a data-toggle="tab" href="#t3"><i class="fa fa-history m-r-5"></i>Order History</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-content p-b-0">
+                                                    <div class="tab-pane" id="t0" >
+                                                        <small>Click a tab to get started.</small>
+                                                    </div>
+                                                    <div class="tab-pane active" id="t1" >
+                                                        <div>
+                                                            <script type="text/ng-template" id="addDeviceModal" >
+                                                                <style>
+                                                                    .hover:hover {
+                                                                        background-color:#c2c2c2;
+                                                                    }
+                                                                </style>
+                                                                <div class="m-l-10">
+                                                                    <h1>Add a Device</h1>
+                                                                    <div class="clearfix">
+                                                                        <div class="pull-left">Search below to find a device</div>
+                                                                        <label class="label label-danger pull-right m-r-10" ng-click="closeThisDialog(); cantFindDevice();">Can't Find Device?</label>
+                                                                    </div>
+                                                                    <div class="m-t-10 m-b-10 p-r-10">
+                                                                        <input class="form-control input-lg" ng-model="searchParam" ng-change="liveSearch(searchParam)" placeholder="Search...">
+                                                                    </div>
+                                                                    <div class=" p-r-10">
+                                                                        <!--<div class="clearfix m-b-5" ng-repeat="printer in searchRtn">
+                                                                            <div class="pull-left h4">{{printer.make}} {{printer.Model}}</div>
+                                                                            <div class="pull-right p-t-5">
+                                                                                <label class="label label-info" ng-click="closeThisDialog(); addPrinter(printer.deviceKey)">Add</label>
+                                                                            </div>
+                                                                        </div>-->
+                                                                        <div class="alert alert-info m-b-5" role="alert" ng-repeat="printer in searchRtn"> 
+                                                                            <p class="pull-left"><i class="pg pg-printer m-r-10"></i>{{printer.make}} {{printer.Model}}</p>
+                                                                                <!--<button class="close" data-dismiss="alert"></button>-->
+                                                                            <p class="pull-right bold no-margin">
+                                                                                <a href="#" ng-click="closeThisDialog(); addPrinter(printer.deviceKey)">Add</a>
+                                                                            </p>
+                                                                            <div class="clearfix"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </script>
+                                                            <script type="text/ng-template" id="cantFindDeviceModal" >
+                                                                <div class="m-l-10">
+                                                                    <h1>Request a Device</h1>
+                                                                    <div class="clearfix">
+                                                                        <div class="pull-left">Let us know what device you can't find!</div>
+
+                                                                    </div>
+                                                                    <div class="m-t-10 m-b-10 p-r-10">
+                                                                        <div class="form-group form-group-default">
+                                                                            <label>Make</label>
+                                                                            <select class="form-control cs-select cs-skin-slide" ng-model="request.make">
+                                                                                <option ng-repeat="make in makesAndModels">{{make.Make}}</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group form-group-default">
+                                                                            <label>Model</label>
+                                                                            <input class="form-control" ng-model="request.model" placeholder="Device Name...">
+                                                                        </div>
+                                                                        <div class="form-group form-group-default m-b-10">
+                                                                            <label>Special Instructions</label>
+                                                                            <textarea class="form-control" ng-model="request.spec" placeholder="Special Instructions" rows="4">
+                                                                    
+                                                                            </textarea>
+                                                                        </div>
+                                                                        <hr>
+                                                                        <div class="m-t-10 m-b-10" ng-show="request.model">
+                                                                            <h5>Hey nexToner,</h5>
+                                                                            <div>I'm looking for a <strong>{{request.make}} {{request.model}}</strong>. Do you guys have something like that?</div>
+                                                                            <br>
+                                                                            <div>Thanks,</div>
+                                                                            <small>{{currentUser.fName}}</small>
+                                                                        </div>
+                                                                        <hr>
+                                                                        
+                                                                        <button class="btn btn-info m-t-10" ng-click="closeThisDialog(); requestDevice(request)">Request Device</button>
+                                                                    </div>
+                                                                </div>
+                                                            </script>
+                                                            
+                                                            <div class="m-b-10">
+                                                                <div class="alert alert-danger" ng-show="printers == null || printers.length == 0" role="alert">You don't have any devices added yet!</div>
+                                                                <button class="btn btn-info" ng-click="addDeviceModal()">Add a Device</button>
+                                                            </div>
+                                                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+       
+                                                               <div class="panel panel-default" ng-repeat="printer in printers track by $index">
+                                                                  <div ng-click="toner(printer.deviceKey)" class="panel-heading" role="tab" id="heading{{printer.deviceKey}}">
+                                                                    <h4 class="panel-title">
+                                                                        <a class="collapsed collapseMe" data-toggle="collapse" data-parent="#accordion" href="#collapse{{printer.deviceKey}}" aria-expanded="false" aria-controls="collapse{{printer.deviceKey}}">
+                                                                            <i class="pg pg-printer m-r-5"></i> {{printer.Make + ' ' + printer.Model}}
+                                                                        </a>
+                                                                    </h4>
+                                                                      
+                                                                  </div>
+                                                                  <div id="collapse{{printer.deviceKey}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{printer.deviceKey}}">
+                                                                    <div class="panel-body">
+                                                                        
+                                                                        <table class="table compact table-hover table-condensed no-footer">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Part #</th>
+                                                                                    <th class="hidden-xs">Type</th>
+                                                                                    <th class="hidden-xs">Yield</th>
+                                                                                    <th class="hidden-xs" style="width:100px;">Color</th>
+                                                                                    <th>Cost</th>
+                                                                                    <th style="width:20%;">Add to Cart</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr ng-repeat="t in toners track by $index">
+                                                                                    <td><i class="fa fa-circle m-r-10" ng-style="tonerCircle(t.color)"></i>{{t.partNo}}</td>
+                                                                                    <td class="hidden-xs">{{t.Type}}</td>
+                                                                                    <td class="hidden-xs">{{t.yield | number}} pages</td>
+                                                                                    <td class="hidden-xs">{{t.color}}</td>
+                                                                                    <td >
+                                                                                        <span ng-show="t.quotePrice > 0" class="text-success">{{t.quotePrice | currency}}</span>
+                                                                                        <span ng-hide="hidePricing(t.status, t.quotePrice)" ng-click="requestPricing($event, t.tonerKey)" class="label label-success pointer">Request Pricing</span>
+                                                                                        <span ng-show="hidePricing(t.status, t.quotePrice)" class="text-danger"><small>{{reqMsg}}</small></span>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group"  ng-init="t.qty = '1'" ng-show="t.quotePrice > 0">
+                                                                                            <input type="text" class="form-control input-sm hidden-xs" placeholder="Qty" ng-model="t.qty" maxlength="2">
+                                                                                            <span ng-click="addToCart(t.tonerKey, t.qty, t.partNo, t.Type, t.yield, t.color)" class="input-group-addon info icon p-t-0">
+                                                                                                <i class="fa fa-shopping-cart "></i>
+                                                                                            </span>
+                                                                                        </div>
+                                                                                        <span ng-hide="t.quotePrice > 0">Unavailable</span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        
+                                                                        </table>
+                                                                        <button class="btn btn-danger" ng-click="removeDevice($index, printer.coDeviceKey)">Remove Printer</button>
+                                                                       </div>
+                                                                    </div>
+                                                                </div>                                                          
+                                                            </div>  
+                                                        </div>
+                                                    </div>
+                                                    
+                        <!-- CART -->
+                                                    <div class="tab-pane " id="t2" >
+                                                        <wizard on-finish="finished()" class="bg-white" hide-indicators="true" ng-init="ship.addr1 = currentUser.addr1; ship.addr2 = currentUser.addr2; ship.city = currentUser.city; ship.state = currentUser.state;ship.zip = currentUser.zip;">
+                                                            <wz-step title="Your cart">
+                                                                <div class=" bg-white">
+                                                                    <ul class="pager wizard">
+                                                                        <li class="next">
+                                                                            <button type="button" ng-disabled="totall == '0'" class="btn btn-warning btn-cons btn-animated from-left fa  fa-truck pull-right" wz-next >
+                                                                                <span>Checkout</span>
+                                                                            </button>
+                                                                        </li>
+    
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="row row-same-height">
+                                                                  
+                                                                    
+                                                                    
+                                                                    
+                                                                    <div class="">
+                                                                        <table class="table compact table-hover table-condensed no-footer">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Item</th>
+                                                                                    <th class="hidden-xs">Details</th>
+                                                                                    <th class="hidden-xs">Price</th>
+                                                                                    <th style="width:10%x;">Qty</th>
+                                                                                    <th style="width:20%;">Total</th>
+                                                                                    <th style="width:75px; text-align:right;">Actions</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr ng-repeat="item in cartItems track by $index">
+                                                                                    <td  cartHdrKey = "{{item.cartHdrKey}}">{{item.partno}}</td>
+                                                                                    <td class="hidden-xs">{{item.type + ' ' + item.yield + ' ' + item.color}}</td>
+                                                                                    <td class="hidden-xs">{{item.quoteprice | currency}}</td>
+                                                                                    <td>
+                                                                                        <form name='form' >
+                                                                                            <input class="input-sm form-control " ng-model="item.qty" ng-change="saveBtnRst(item.cartLineKey, item.qty)" maxlength="2">
+                                                                                        </form>
+                                                                                    </td>
+                                                                                    <td>{{item.qty * item.quoteprice | currency}}</td>
+                                                                                    <td>
+                                                                                        <!--<button class="btn btn-sm btn-info" ng-click="saveBtnRst(item.cartLineKey, item.qty)">Save</button>-->
+                                                                                        <button ng-click="deleteItem($index, item.cartLineKey)" class="btn btn-sm btn-danger pull-right"><i class="fa fa-trash"></i></button>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+
+
+                                                                        <div class=" m-t-20" style="width:100%;">
+                                                                            <div class="col-md-2 col-middle p-l-25 sm-p-t-15 sm-p-l-15 clearfix sm-p-b-15 p-t-10">
+                                                                                <h5 class="font-montserrat all-caps small no-margin hint-text bold">Shipping</h5>
+                                                                                <h3 class="no-margin">{{getShipping(getSubTotal(), currentUser.payShipping) | currency}} </h3>
+                                                                            </div>
+                                                                            <div class="col-md-5  col-middle clearfix sm-p-b-15 p-t-10">
+                                                                                <h5 class="font-montserrat all-caps small no-margin hint-text bold">Sales Tax <small>({{taxPercent | limitTo: 4}}%)</small></h5>
+                                                                                <h3 class="no-margin">{{getTax(taxRate, getSubTotal(), currentUser.payTax) | currency}}</h3>
+                                                                            </div>
+                                                                            <div class="col-md-5 text-right bg-menu padding-15 p-r-20">
+                                                                                <h5 class="font-montserrat all-caps small no-margin hint-text text-white bold">Total</h5>
+                                                                                <h1 class="no-margin text-white">{{getTotal(getSubTotal(), getTax(taxRate, getSubTotal(), currentUser.payTax), getShipping(getSubTotal(), currentUser.payShipping)) | currency}}</h1>
+                                                                            </div>
+                                                                        </div>
+                                
+                                                                    </div>
+                                                                    
+                                                                    
+                                                                    
+                                                                </div>
+                                              
+                                                                
+                                                            </wz-step>
+                                                            <wz-step title="Shipping information">
+                                                                <a>Select Shipping Address</a>
+                                                                <div class="row row-same-height padding-50 " >
+                                                                    <h3>Shipping Information</h3>
+                                                                    
+                                                                        <div class="row">
+                                                                            <div class="col-sm-8">
+                                                                                <div class="form-group form-group-default required">
+                                                                                    <label>Address 1</label> <input class="form-control" required="" type="text" ng-model="ship.addr1">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-sm-4">
+                                                                                <div class="form-group form-group-default ">
+                                                                                    <label>Address 2</label> <input class="form-control" type="text" ng-model="ship.addr2">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-sm-4">
+                                                                                <div class="form-group form-group-default required">
+                                                                                    <label>City</label> <input class="form-control" required="" type="text" ng-model="ship.city">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-sm-4">
+                                                                                <div class="form-group form-group-default required">
+                                                                                    <label>State</label> <input class="form-control" required="" type="text" ng-model="ship.state">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-sm-4">
+                                                                                <div class="form-group form-group-default required">
+                                                                                    <label>Zip</label> <input class="form-control" required="" type="text" ng-model="ship.zip">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                  
+                                                                    
+                                                                    
+                                                                </div>
+                                                                <div class=" bg-white">
+                                                                    <ul class="pager wizard">
+                                                                        <li class="next">
+                                                                            <button id="" type="button" class="btn btn-primary btn-cons btn-animated from-left fa fa-credit-card pull-right" wz-next>
+                                                                                <span>Next</span>
+                                                                            </button>
+                                                                        </li>
+                                                                        <li class="previous">
+                                                                            <button type="button" class="btn btn-default btn-cons pull-right" wz-previous>
+                                                                                <span>Previous</span>
+                                                                            </button>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </wz-step>
+                                                            
+                                                            <wz-step title="Payment Details" class="purchaseSection">
+                                                                <div class="row row-same-height" ng-init="cc == false; invoice == false;">
+                                                                    <script type="text/ng-template" id="payByInvoiceModal" >
+                                                                        <div class="m-l-10">
+                                                                            <h1>Pay By Invoice</h1>
+                                                                            <p>
+                                                                                You have chosen to have us send you an invoice rather than paying by credit card. By clicking below, you agree to the terms of credit and payment. An invoice will be sent to <strong>{{currentUser.username}}</strong> and payment is expected within 10 business days. If you don't see the email shortly, please check your 'Junk' and 'Spam' folders.
+                                                                            </p>
+                                                                            <hr>
+                                                                            <div class="m-t-10 clearfix" ng-init="inv.fname = currentUser.fName; inv.username = currentUser.username; inv.coKey = currentUser.coKey; inv.userKey = currentUser.userKey; inv.addr1 = ship.addr1; inv.addr2 = ship.addr2; inv.city = ship.city; inv.state = ship.state; inv.zip = ship.zip;">
+                                                                                <small>You may enter an optional PO#</small>
+                                                                                <br>
+                                                                                <input class="form-control" ng-model="inv.poNum" placeholder="PO#">
+                                                                                <button class="btn btn-success m-t-15 m-l-5 pull-right" ng-click="closeThisDialog(); invoiceOrder(inv)">Complete Purchase</button>
+                                                                                <button class="btn btn-default m-t-15 pull-right" ng-click="closeThisDialog()">Cancel</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </script>                                                                    
+                                                                    <div class="col-md-6 col-md-offset-3 b-grey m-b-30">
+                                                                        <h4>{{currentUser.fName}},</h4>
+                                                                        <div>Please review the totals below and let us know if you have any questions. Feel free to contact your rep (<strong>{{company.rFname}} {{company.rLname}}</strong>) at {{company.rUsername}}.</div>
+                                                                        
+                                                                        <div class="bg-menu p-l-20 padding-15 m-b-20 m-t-20 clearfix">
+                                                                            <div class="pull-left">
+                                                                                <div class="font-montserrat all-caps small no-margin hint-text text-white">Total</div>
+                                                                                <h2 class=" no-margin m-t-0 text-white">{{totall / 100 | currency}}</h2>
+                                                                            </div>
+                                                                            <div class="pull-right text-white clearfix col-md-5">
+                                                                                <small class="pull-left"><strong class="hint-text">Subtotal</strong></small> <small class="pull-right">{{subTotal | currency}}</small><br>
+                                                                                <small class="pull-left"><strong class="hint-text">Shipping</strong></small> <small class="pull-right">{{getShipping(getSubTotal(), currentUser.payShipping) | currency}}</small><br>
+                                                                                <small class="pull-left"><strong class="hint-text">Sales Tax ({{taxPercent | limitTo: 4}}%)</strong></small> <small class="pull-right">{{getTax(taxRate, getSubTotal(), currentUser.payTax) | currency}}</small><br>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="clearfix">
+                                                                            <button ng-click="cc = true; invoice = false" ng-show="!cc" class="btn btn-lg btn-info pull-left" style="background-color:#337ab7; border:0px solid #ffffff;">
+                                                                                <strong>Pay by Card <img src="https://stripe.com/img/about/logos/badge/solid-light.svg" width="70" class="m-l-10"></strong>
+                                                                            </button>
+                                                                            <button ng-click="cc = false; invoice = true; payByInvoice(ship)" ng-show="!cc && pmtTerms(currentUser.pmtTerms)" class="btn btn-lg btn-warning pull-right">
+                                                                                <strong>Pay by Invoice</strong>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div ng-if="cc" class="col-md-6 col-md-offset-3 b-grey m-b-30">
+                                                                        
+                                                                        
+                                                                        <form action="/charge" id="payform" method="post" name="payform">
+                                                                            <div class="alert alert-danger" role="alert" ng-model="feedbackDanger" ng-show="feedbackDanger.len < 10">
+                                                                                
+                                                                            </div>
+                                                                            <fieldset class="grid ">
+                                                                                <div style="display:none;">
+                                                                                    <input name="coKey" value="{{currentUser.coKey}}"> <input name="userKey" value="{{currentUser.userKey}}"> <input name="addr1" value="{{ship.addr1}}"> <input name="addr2" value="{{ship.addr2}}"> <input name="city" value="{{ship.city}}"> <input name="state" value="{{ship.state}}"> <input name="zip" value="{{ship.zip}}">
+                                                                                </div>
+                                                                                <div class="formfield cell cell-sm-12 cell-md-12 cell-lg-12 m-b-10">
+                                                                                    <label><span class="form-label" title="∗ Required">Your Email</span></label>
+                                                                                    <input class="form-input form-control" data-stripe="email" name="email" pattern=".{5,40}" required="" title="Please enter your email address" type="email"> 
+                                                                                </div>
+                                                                                <div class="formfield cell cell-sm-12 cell-md-12 cell-lg-12 m-b-10">
+                                                                                    <label><span class="form-label" title="∗ Required">Card Number</span></label>
+                                                                                    <input class="form-input form-control" data-stripe="number" maxlength="16" pattern="[0-9]{13,16}" required="" title="Please enter your card number" type="text"> 
+                                                                                </div>
+                                                                            </fieldset>
+                                                                            <fieldset class="grid">
+                                                                                <div class="formfield cell cell-sm-12 cell-md-12 cell-lg-12 m-b-10">
+                                                                                    <label> <span class="form-label" title="∗ Required">CVC</span></label>
+                                                                                    <input class="form-input form-control" data-stripe="cvc" maxlength="4" pattern="[0-9]{3,4}" required="" title="Please enter the CVC" type="text">
+                                                                                </div>
+                                                                            </fieldset>
+                                                                            <fieldset class="grid">
+                                                                                <div class="formfield cell cell-sm-6 cell-md-6 cell-lg-6 m-b-10">
+                                                                                    <label><span class="form-label" title="∗ Required">Expiration Month MM</span></label>
+                                                                                    <input class="form-input form-control" data-stripe="exp-month" maxlength="2" pattern="0[1-9]|1[012]" required="" title="Expiry month" type="text"> 
+                                                                                </div>
+                                                                                <div class="formfield cell cell-sm-6 cell-md-6 cell-lg-6 m-b-10">
+                                                                                    <label><span class="form-label" title="∗ Required">Expiration Year (YYYY)</span></label>
+                                                                                    <input class="form-input form-control" data-stripe="exp-year" maxlength="4" pattern="[0-9]{4,4}" required="" title="Expiry year" type="text"> 
+                                                                                </div>
+                                                                            </fieldset>
+                                                                            <fieldset class="grid">
+                                                                                <div class="formfield cell">
+                                                                                    <button class="button btn btn-lg btn-info btn-block" id="btnpay" name="submit" type="submit" style="background-color:#337ab7; border:0px solid #ffffff;"><strong>Pay by Card <img src="https://stripe.com/img/about/logos/badge/solid-light.svg" width="70" class="m-l-10"></strong></button>
+                                                                                </div>
+                                                                                
+                                                                                
+                                                                            </fieldset>
+                                                                        </form>
+                                                                        <script>Stripe.setPublishableKey('pk_live_GEjRV0ktYMKXEEGn5mYGgBv1');</script>
+                                                                        <script>
+                                                                            function stripeResponseHandler(status, response) {
+                                                                                "use strict";
+                                                                                var paymentForm = document.forms['payform'];
+                                                                                if (response.error) {
+                                                                                    document.getElementById('feedback').textContent = response.error.message;
+                                                                                    document.getElementById('btnpay').removeAttribute('disabled');
+                                                                                } else {
+                                                                                    var stripeToken = response.id;
+                                                                                    var stripeTokenField = document.createElement('input');
+                                                                                    stripeTokenField.type = "hidden";
+                                                                                    stripeTokenField.id = "stripeToken";
+                                                                                    stripeTokenField.name = "stripeToken";
+                                                                                    stripeTokenField.value = stripeToken;
+                                                                                    paymentForm.appendChild(stripeTokenField);
+
+                                                                                    function submitForm() {
+                                                                                        /*var xhr=new XMLHttpRequest();
+                                                                                        xhr.onload=function(){console.log(xhr.responseText);}
+                                                                                        xhr.onerror=function(){document.getElementById('feedback').textContent="Sorry, there was a technical error. Please try again later.";console.log(xhr.responseText);}
+                                                                                        xhr.open(paymentForm.method,paymentForm.action,true);
+                                                                                        xhr.send(new FormDatapaymentForm
+                                                                                          */
+                                                                                        var lol = $('#payform').serializeJSON();
+                                                                                        $.ajax({
+                                                                                            url: "/charge",
+                                                                                            type: "POST",
+                                                                                            data: lol,
+                                                                                            success: function(data, textStatus, jqXHR) {
+                                                                                                swal({
+                                                                                                  title: "Success",
+                                                                                                  text: "Thank you for your order. Your payment was succesfully processed!",
+                                                                                                  type: "success",
+                                                                                                  confirmButtonText: "Close",
+                                                                                                  closeOnConfirm: false
+                                                                                                },
+                                                                                                function(){
+                                                                                                    location.reload();
+                                                                                                });
+                                                                                                
+                                                                                            },
+                                                                                            error: function(jqXHR, textStatus, errorThrown) {
+                                                                                                swal("PROCESSING ERROR", "We were unable to process this payment. Please check all your card information and verify it has been entered correctly.", "error")
+                                                                                            }
+                                                                                        });
+                                                                                        console.log(lol);
+                                                                                        return false;
+                                                                                    }
+                                                                                    return submitForm();
+                                                                                }
+                                                                            }! function() {
+                                                                                "use strict";
+                                                                                var paymentForm = document.forms['payform'];
+                                                                                paymentForm.addEventListener('submit', function(e) {
+                                                                                    e.preventDefault();
+                                                                                    var thisForm = this;
+                                                                                    document.getElementById('btnpay').setAttribute('disabled', true);
+                                                                                    //var amountField=document.getElementById('amount');
+                                                                                    //amountField.value=function(){var amountBaseVal=document.getElementById('amountbase').value;return amountBaseVal * 100;}
+                                                                                    //console.log(amountField.value);
+                                                                                    Stripe.card.createToken(thisForm, stripeResponseHandler);
+                                                                                });
+                                                                            }();
+                                                                        </script>
+                                                                    </div>
+                                                                    <div class="col-md-6 col-md-offset-3 b-grey m-b-30">
+                                                                        <ul class="pager wizard">
+                                                                            <li class="previous">
+                                                                                <button type="button" class="btn btn-default btn-block btn-cons pull-right no-margin" wz-previous>
+                                                                                    <span>Previous</span>
+                                                                                </button>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="padding-20 bg-white">
+                                                                    
+                                                                </div>
+                                                            </wz-step>
+                                                            <wz-step title="Summary">
+                                                                <div class="padding-30">
+                                                                    <h1 class="text-center">Thank you.</h1>
+                                                                </div>
+                                                                <div class="padding-20 bg-white">
+                                                                    <ul class="pager wizard">
+                                                                        <li class="next">
+                                                                            <button type="button" class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" ng-click="finish()" wz-finish>
+                                                                                <span>Finish</span>
+                                                                            </button>
+                                                                        </li>
+                                                                        <li class="previous">
+                                                                            <button type="button" class="btn btn-default btn-cons pull-right" wz-previous>
+                                                                                <span>Previous</span>
+                                                                            </button>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </wz-step>
+                                                        </wizard>
+                                                    </div>
+                        <!-- END CART -->
+                                                    <div id="t3" class="tab-pane"  ng-init="orderHistTab.orderCnt = '10'" >
+                                                        <div class="row">
+                                                            <div class="col-xs-12 col-sm-6 m-t-10">
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control" ng-model="orderHistTab.orderCnt">
+                                                                    <span class="input-group-btn">
+                                                                        <button class="btn btn-info" type="button" ng-click="orderHistory(orderHistTab.orderCnt)">Show Orders</button>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <!--<div class="col-xs-12 col-sm-8 m-t-10">
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control" placeholder="Search for..." ng-model="orderHistFilter">
+                                                                    <span class="input-group-btn">
+                                                                        <button class="btn btn-success" type="button">Search</button>
+                                                                    </span>
+                                                                </div>
+                                                            </div>-->
+                                                        </div>
+                                                        
+                                                        <div id="accordion2" class="panel-group" role="tablist" aria-multiselectable="true" >
+                                                            <script type="text/ng-template" id="templateId">
+                                                                <div class="m-l-10">
+                                                                    <h1><i class="fa fa-credit-card m-r-10"></i>{{type}} - {{last4}}</h1>
+                                                                    <p>On <strong>{{created * 1000 | date:'medium'}}</strong> we processed a charge for <strong>{{amount | currency}}</strong> to a <strong>{{type}}</strong> card, ending in <strong>{{last4}}</strong>.</p><br>
+                         
+                                                                    <p>The transaction status is: <span class="label label-default">{{status}}</span></p>
+                                                                </div>
+                                                            </script>
+                                                            <div class="panel panel-default m-t-20" ng-repeat="order in checkOutHdr track by $index">
+                                                                <div id="heading{{$index}}" class="panel-heading" role="tab" ng-click="orderHistDtl(order.checkouthdrkey)">
+                                                                    <h3 class="panel-title">
+                                                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{$index}}" aria-expanded="false" aria-controls="collapse{{$index}}">
+                                                                            
+                                                                            <div class="col-xs-8"><strong>Order #{{order.checkouthdrkey}}</strong><span class="light"> {{order.createDate | date}}</span></div>
+                                                                            <div class="col-xs-3 text-right"><strong>{{order.total | currency}}</strong></div>
+                                                                            <div class="col-xs-8 text-left " style="text-transform:none;"><small><strong>{{order.OrderName}}</strong> {{order.OrderDesc | limitTo: 45}}...</small></div>
+                                                                        </a>
+                                                                    </h3>
+                                                                </div>
+                                                                <div id="collapse{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$index}}">
+
+                                                                    <div class="panel-body">
+                                                                        <div class="row">
+                                                                            <div class="col-xs-6 text-left">Details for Order #{{orderDtl.checkOutHdrKey}}</div>
+                                                                            <div class="col-xs-6 text-right"><button class="btn btn-info" style="margin-top:-20px;" ng-click="reorder(orderDtl.checkOutHdrKey)"><i class="fa fa-refresh m-r-5 "></i>Order Again</button></div>
+                                                                        </div>
+                                                                        <hr>
+                                                                        <div class="row>">
+                                                                            <div class="col-xs-10">
+                                                                                <p>
+                                                                                    <strong>{{orderDtl.orderName}}</strong><br>
+                                                                                    <span class="light">{{orderDtl.orderDesc}}</span>
+                                                                                </p>
+                                                                            </div>
+                                                                            <div class="col-xs-2 text-right pointer" ng-click="editOrderTitle(orderDtl.checkOutHdrKey, orderDtl.orderName, orderDtl.orderDesc)"><u>edit name</u></div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-xs-4 text-right hint-text h3 light">Pmt Info:</div>
+                                                                            <div class="col-xs-8 text-left h4">
+                                                                                <p>
+                                                                                    <span ng-click="ccDetails(orderDtl.chrgToken)" class="label label-info">{{pmtType}} </span><br>
+                                                                                    Placed: {{orderDtl.createDate | date}}<br>
+                                                                                    <a target="_blank" href="{{invoiceLink}}" class="custom" style="color:#000000;">Invoice #{{orderDtl.checkOutHdrKey}}</a><br>
+                                                                                    PO #{{orderDtl.PONum}}<br>
+                                                                                    Due: {{dueDate | date}}<br>
+                                                                                    Status: <span class="bold">{{pmtStatus}}</span>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <hr>
+                                                                        <div class="row">
+                                                                            <div class="col-xs-4 text-right hint-text h3 light">Sent To:</div>
+                                                                            <div class="col-xs-8 text-left h4">
+                                                                                <p>
+                                                                                    {{orderDtl.Name}}<br>
+                                                                                    {{useAddr1}}<br>
+                                                                                    <span ng-if="useAddr2">{{useAddr2}}<br></span>
+                                                                                    {{useCity}}, {{useState}} {{useZip}}<br>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <hr>
+                                                                        <div class="row">
+                                                                            <div class="col-xs-4 text-right hint-text h3 light">Amt:</div>
+                                                                            <div class="col-xs-8 text-left">
+                                                                                <div class="row">
+                                                                                    <div class="col-xs-6 text-left">Sub Total</div>
+                                                                                    <div class="col-xs-6 text-right">{{orderDtl.subTotal | currency}}</div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-xs-6 text-left">Est Taxes</div>
+                                                                                    <div class="col-xs-6 text-right">{{orderDtl.tax | currency}}</div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-xs-6 text-left">Shipping Fee</div>
+                                                                                    <div class="col-xs-6 text-right">{{orderDtl.shipping | currency}}</div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-xs-6 text-left bold">Total Amount</div>
+                                                                                    <div class="col-xs-6 text-right bold">{{orderDtl.total | currency}}</div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row m-l-20">
+                                                                            <div class="semi-bold m-t-30 h3">Itemized Order</div>
+                                                                            <table>
+                                                                                <thead class="b-b b-grey">
+                                                                                    <tr>
+                                                                                        <th width="75">Qty</th>
+                                                                                        <th width="300">Description</th>
+                                                                                        <th width="100">Cost/Ea</th>
+                                                                                        <th width="115">Total</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr ng-repeat="item in itemList">
+                                                                                        <td>{{item.qty}}</td>
+                                                                                        <td><span class="semi-bold">{{item.partNo}}</span> <span class="light">{{item.color}} {{item.yield}}</span></td>
+                                                                                        <td>{{item.quotePrice | currency}}</td>
+                                                                                        <td>{{item.qty*item.quotePrice | currency}}</td>
+                                                                                    </tr>
+                                                                
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>                                                          
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                       </div>
+                        <!--<div class="col-md-12 col-lg-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">Notifications</div>
+                                   
+                                    <div class="panel-body no-padding p-t-10">
+                                        <div ng-repeat="alert in alerts track by $index" class="alert m-b-5 pointer" ng-class="alertColor(alert.alertType)">
+                                            <i ng-class="alertIcon(alert.deviceType)" class="m-r-5"></i>
+                                            {{alertSentance(alert.alertType, alert.deviceType, alert.deviceName)}}<button class="close" data-dismiss="alert" ng-click="removeAlert($index, alert.alertKey)"></button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                        </div>-->
+                   </div>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>
+

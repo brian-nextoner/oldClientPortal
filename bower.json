@@ -1,0 +1,21 @@
+{
+  "name": "nextoner",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "clark-desktop <clark@nextoner.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/nexToner/nextonerv2",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-payments": "*"
+  }
+}
