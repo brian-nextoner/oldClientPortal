@@ -284,7 +284,40 @@ var getMyPrinters = function(jsonParams, req, callback) {
             });
  
     }
-}                
+}
+
+var getShippingAddress = function(jsonParams, req, callback) {
+    var userRs = req.user.recordset;
+    var param = JSON.parse(jsonParams);
+    new sql.Request(conn)
+    .input('coKey', sql.Int, param)
+    .execute('get_shippingAddressList', function(err, recordsets) {
+        if(!err) {
+            var recordset = recordsets[0];
+            callback(recordset);
+        } else {
+            callback(err);
+        }
+    });
+}
+
+var getDefShippingAddress = function(jsonParams, req, callback) {
+    var userRs = req.user.recordset;
+    var param = JSON.parse(jsonParams);
+    new sql.Request(conn)
+    .input('coKey', sql.Int, param)
+    .execute('getDefShippingAddress', function(err, recordsets) {
+        if(!err) {
+            var recordset = recordsets[0];
+            callback(recordset);
+        } else {
+            callback(err);
+        }
+    });
+}
+
+
+
 
 var addDeviceToCompany = function(jsonParams, req, callback) {
     var userRs = req.user.recordset;
@@ -552,6 +585,8 @@ module.exports.reorder = reorder;
 
 module.exports.getMyCompany = getMyCompany;
 module.exports.getMyPrinters = getMyPrinters;
+module.exports.getShippingAddress = getShippingAddress;
+module.exports.getDefShippingAddress = getDefShippingAddress;
 module.exports.addDeviceToCompany = addDeviceToCompany;
 module.exports.removeDeviceFromCompany = removeDeviceFromCompany;
 
@@ -570,3 +605,4 @@ module.exports.makesAndModels = makesAndModels;
 
 module.exports.updateProfile = updateProfile;
 module.exports.orderUpdateName = orderUpdateName;
+

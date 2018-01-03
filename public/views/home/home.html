@@ -364,14 +364,13 @@
                                                                 
                                                             </wz-step>
                                                             <wz-step title="Shipping information">
-                                                                <a>Select Shipping Address</a>
+                                                                <a ng-click="getShippingAddress(coKey)">Select Shipping Address</a>
                                                                 <div class="row row-same-height padding-50 " >
                                                                     <h3>Shipping Information</h3>
-                                                                    
                                                                         <div class="row">
                                                                             <div class="col-sm-8">
                                                                                 <div class="form-group form-group-default required">
-                                                                                    <label>Address 1</label> <input class="form-control" required="" type="text" ng-model="ship.addr1">
+                                                                                    <label>Address 1</label> <input class="form-control" required="" type="text" ng-model="defAddress.addr1">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-sm-4">
@@ -383,21 +382,30 @@
                                                                         <div class="row">
                                                                             <div class="col-sm-4">
                                                                                 <div class="form-group form-group-default required">
-                                                                                    <label>City</label> <input class="form-control" required="" type="text" ng-model="ship.city">
+                                                                                    <label>City</label> <input class="form-control" required="" type="text" ng-model="defAddress.city">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-sm-4">
                                                                                 <div class="form-group form-group-default required">
-                                                                                    <label>State</label> <input class="form-control" required="" type="text" ng-model="ship.state">
+                                                                                    <label>State</label> <input class="form-control" required="" type="text" ng-model="defAddress.state">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-sm-4">
                                                                                 <div class="form-group form-group-default required">
-                                                                                    <label>Zip</label> <input class="form-control" required="" type="text" ng-model="ship.zip">
+                                                                                    <label>Zip</label> <input class="form-control" required="" type="text" ng-model="defAddress.zip">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        
+                                                                        <script type="text/ng-template" id="selShippingAddress" >
+                                                                            <div class="m-l-10">
+                                                                                <h2>Select a Shipping Address</h2>
+                                                                                <div class="m-t-10 m-b-10 p-r-10">
+                                                                                    <button class="btn btn-primary m-t-10" ng-repeat="address in addresses track by $index" ng-click="selShippingAddress($index)">
+                                                                                        {{address.addr1}} {{address.addr2}}, {{address.city}} {{address.myState}} {{address.zip}}
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </script>
                                                                   
                                                                     
                                                                     
@@ -455,7 +463,7 @@
                                                                             <button ng-click="cc = true; invoice = false" ng-show="!cc" class="btn btn-lg btn-info pull-left" style="background-color:#337ab7; border:0px solid #ffffff;">
                                                                                 <strong>Pay by Card <img src="https://stripe.com/img/about/logos/badge/solid-light.svg" width="70" class="m-l-10"></strong>
                                                                             </button>
-                                                                            <button ng-click="cc = false; invoice = true; payByInvoice(ship)" ng-show="!cc && pmtTerms(currentUser.pmtTerms)" class="btn btn-lg btn-warning pull-right">
+                                                                            <button ng-click="cc = false; invoice = true; payByInvoice(defAddress)" ng-show="!cc && pmtTerms(currentUser.pmtTerms)" class="btn btn-lg btn-warning pull-right">
                                                                                 <strong>Pay by Invoice</strong>
                                                                             </button>
                                                                         </div>

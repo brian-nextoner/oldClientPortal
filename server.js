@@ -82,6 +82,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
 
+
+
+
 passport.use(new LocalStrategy(
     function(username, password, done) {
         sql.connect(a, function() {
@@ -174,7 +177,8 @@ app.post('/invoice', function(req, res) {
                                             server.send({
                                                 from: 'NexToner.com <info@nextoner.com>',
                                                 to: inv.username,
-                                                cc: 'info@nextoner.com, ' +repUsername,
+                                                cc: 'info@nextoner.com, ' + repUsername,
+                                                //cc: 'info@nextoner.com,',
                                                 subject: 'nexToner Invoice for your purchase',
                                                 attachment: 
                                                    [
@@ -236,7 +240,7 @@ app.post('/charge', function(req, res) {
                                         //ERROR POINT #1
                                         server.send({
                                             from: 'NexToner.com <info@nextoner.com>',
-                                            to: '2088604346@messaging.sprintpcs.com, brian.mccauley@nextoner.com',
+                                            to: 'brian.mccauley@nextoner.com',
                                             subject: 'ERROR_CARTHDRKEY_'+cartHdrKey+'_ERROR_'+err+'_ERRORPOINT_1',
                                         });
                                         res.send(500, err);
@@ -268,7 +272,7 @@ app.post('/charge', function(req, res) {
                                                     //var fName = inv.fname;
                                                     server.send({
                                                         from: 'NexToner.com <info@nextoner.com>',
-                                                        to: '2088604346@messaging.sprintpcs.com, brian.mccauley@nextoner.com',
+                                                        to: 'brian.mccauley@nextoner.com',
                                                         subject: 'Order# ' + checkOutHdrKey + ' Placed Online',
                                                         attachment: 
                                                            [
@@ -292,7 +296,7 @@ app.post('/charge', function(req, res) {
                                                      //ERROR POINT #1
                                                     server.send({
                                                         from: 'NexToner.com <info@nextoner.com>',
-                                                        to: '2088604346@messaging.sprintpcs.com, brian.mccauley@nextoner.com',
+                                                        to: 'brian.mccauley@nextoner.com',
                                                         subject: 'ERROR_ORDER_' + checkOutHdrKey + '_ERROR_'+err+'_ERRORPOINT_1',
                                                     });
                                                     res.send(err);
@@ -305,7 +309,7 @@ app.post('/charge', function(req, res) {
                                 //ERROR POINT #2-- Order amount returned as NULL
                                 server.send({
                                     from: 'NexToner.com <info@nextoner.com>',
-                                    to: '2088604346@messaging.sprintpcs.com, brian.mccauley@nextoner.com',
+                                    to: 'brian.mccauley@nextoner.com',
                                     subject: 'ERROR_CARTHDRKEY_'+cartHdrKey+'_ERROR_'+err+'_ERRORPOINT_2',
                                 });
                                 res.send('Error')
@@ -314,7 +318,7 @@ app.post('/charge', function(req, res) {
                             //ERROR POINT #3
                             server.send({
                                 from: 'NexToner.com <info@nextoner.com>',
-                                to: '2088604346@messaging.sprintpcs.com, brian.mccauley@nextoner.com',
+                                to: 'brian.mccauley@nextoner.com',
                                 subject: 'ERROR_CARTHDRKEY_'+cartHdrKey+'_ERROR_'+err+'_ERRORPOINT_1',
                             });
                             console.log(err);
@@ -325,7 +329,7 @@ app.post('/charge', function(req, res) {
                 //ERROR POINT #4
                 server.send({
                     from: 'NexToner.com <info@nextoner.com>',
-                    to: '2088604346@messaging.sprintpcs.com, brian.mccauley@nextoner.com',
+                    to: 'brian.mccauley@nextoner.com',
                     subject: 'ERROR_CARTHDRKEY_'+cartHdrKey+'_ERROR_'+err+'_ERRORPOINT_1',
                 });
             }
@@ -466,8 +470,6 @@ app.post('/api/user/order/orderUpdateName', function(req, res) {
     });
 });
 // END API Preprocess Assigner
-
-
 
 
 

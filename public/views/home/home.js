@@ -54,6 +54,7 @@ function homeOrdersCtrl($scope, $rootScope, $http, fac_session) {
 
     fac_session.getSession().success(handleSuccess);
 };
+
 function orderHistDtl($scope, $http, $rootScope, fac_session){
 
     $scope.orderHistory = function(){
@@ -73,20 +74,35 @@ function orderHistDtl($scope, $http, $rootScope, fac_session){
     
     fac_session.getSession().success(initData);
 };
+
 function userHomeCtrl($scope, $rootScope, $http, fac_session, $window, ngDialog, $state) {
+    
+    
     var initData = function(data, status) {
         var GuserKey = data.userKey;
         var GuserType = data.userType;
         var GcoKey = data.coKey;
         var Gstate = data.state;
-        
-        
+
+        var access2 = 'user'
+        $http.get('/api/' + access2 + '/company/getShippingAddress/[' + GcoKey + ']').success(function(data) {
+            $scope.addresses = data;
+        });
+
+        $http.get('/api/' + access2 + '/company/getDefShippingAddress/[' + GcoKey + ']').success(function(data) {
+            $scope.defAddress = data[0];
+            console.log("Def Shipping:", $scope.defAddress)
+        });
         
         $http.get('/api/user/global/makesAndModels/null').success(function(data) {  
             $scope.makesAndModels = data;
         });
-        
-         var getAlerts = function(userType) {
+
+        $scope.selShippingAddress = function(index){
+            $scope.defAddress.addr1 = "Test Me"
+        }
+
+        var getAlerts = function(userType) {
             var access = null;
                 
             if(userType === 30) { 
@@ -156,8 +172,14 @@ function userHomeCtrl($scope, $rootScope, $http, fac_session, $window, ngDialog,
                 $scope.coKey = data[0].coKey;
                 getAlerts(GuserType);
             }); 
-            
-           
+        }
+
+        var getShippingAddress = function(coKey){
+            ngDialog.open({ 
+                template: 'selShippingAddress', 
+                className: 'ngdialog-theme-default',
+                controller: 'userHomeCtrl'
+            });   
         }
 
         var getPrinters = function(coKey, userType) {
@@ -258,7 +280,11 @@ function userHomeCtrl($scope, $rootScope, $http, fac_session, $window, ngDialog,
         }
         
         var getCart = function(coKey, userType, state) {
-            
+            getShAddr();
+
+            function getShAddr(){
+                console.log("Code run")
+            }
             
             var access = null;
                 
@@ -269,10 +295,6 @@ function userHomeCtrl($scope, $rootScope, $http, fac_session, $window, ngDialog,
             } else { 
                 access = 'user' 
             }
-            
-        
-            
-            
 
             $http.get('/api/' + access + '/cart/getActiveCart/[' + coKey + ']').success(function(data) {
                 $scope.cartItems = data;
@@ -465,6 +487,8 @@ function userHomeCtrl($scope, $rootScope, $http, fac_session, $window, ngDialog,
                 }
 
             });
+
+
         }
         
         
@@ -484,6 +508,10 @@ function userHomeCtrl($scope, $rootScope, $http, fac_session, $window, ngDialog,
         var orderHistoryHandleSuccess = function(coKey, userKey, userType, orderCnt) {
             getOrderHistory(coKey, userKey, userType, orderCnt)
         };
+
+        $scope.getShippingAddress = function(coKey){
+            getShippingAddress(coKey)
+        }
 
         $scope.printer = function(coKey) {
             printersHandleSuccess(GcoKey, GuserType);

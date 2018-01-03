@@ -119,6 +119,7 @@ var preprocessor = function(accesstype, property, subproperty, jsonParams, req, 
     }
     
     var company = function(accesstype, property, subproperty, jsonParams, req, callback) {
+
         if (process.access === permissions.admin ) {
             if(subproperty != 0) {
                 sql.getCompanies(subproperty, function(response){callback(response)})
@@ -132,6 +133,10 @@ var preprocessor = function(accesstype, property, subproperty, jsonParams, req, 
                 sql.getMyCompany(jsonParams, req, function(response){callback(response)})
             } else if(subproperty === 'getMyPrinters') {
                 sql.getMyPrinters(jsonParams, req, function(response){callback(response)})
+            } else if(subproperty === 'getShippingAddress') {
+                sql.getShippingAddress(jsonParams, req, function(response){callback(response)})
+            } else if(subproperty === 'getDefShippingAddress') {
+                sql.getDefShippingAddress(jsonParams, req, function(response){callback(response)})
             } else if(subproperty === 'addDevice') {
                 sql.addDeviceToCompany(jsonParams, req, function(response){callback(response)})
             } else if(subproperty === 'removeDeviceFromCompany') {
